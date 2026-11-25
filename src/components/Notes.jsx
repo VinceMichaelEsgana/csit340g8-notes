@@ -6,6 +6,7 @@ const startingNotes = [
   { id: 2, title: 'Prepare for the quiz', body: 'Practice writing one handler for many inputs.' },
 ]
 
+
 function Notes() {
   const [notes, setNotes] = useState(() => {
   const saved = localStorage.getItem("notes");
@@ -15,8 +16,11 @@ function Notes() {
   const [search, setSearch] = useState("");
 
  useEffect(() => {
-  localStorage.setItem('notes', JSON.stringify(notes))
-}, [notes])
+  const id = setTimeout(() => {
+    localStorage.setItem('draft', JSON.stringify(form))
+  }, 1000)
+  return () => clearTimeout(id)
+}, [form])
 
   function handleChange(event) {
     const { name, value } = event.target;
