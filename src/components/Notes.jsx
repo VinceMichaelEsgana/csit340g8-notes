@@ -1,5 +1,5 @@
 import NoteCard from "./NoteCard.jsx";
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 const startingNotes = [
   { id: 1, title: 'Review map and filter', body: 'Redo the TodoMVC steps without looking at the guide.' },
@@ -13,7 +13,11 @@ function Notes() {
   return saved ? JSON.parse(saved) : startingNotes;
 });
   const [form, setForm] = useState({ title: "", body: "" });
+  titleRef.current.focus()
+
   const [search, setSearch] = useState("");
+
+  const titleRef = useRef(null)
 
  useEffect(() => {
   const id = setTimeout(() => {
@@ -67,6 +71,7 @@ function Notes() {
             NEW NOTE
           </p>
           <input
+            ref={titleRef}
             name="title"
             value={form.title}
             onChange={handleChange}
